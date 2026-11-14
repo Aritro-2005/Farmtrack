@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriChain - Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="left-panel">
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+        <h1>AgriChain</h1>
+      </div>
+      <h2>Blockchain-Powered Supply Chain Transparency</h2>
+      <p>Track your agricultural products from farm to table with our secure blockchain technology</p>
+
+      <ul class="features">
+        <li><i class="fas fa-check"></i> Immutable record of product journey</li>
+        <li><i class="fas fa-check"></i> Verify authenticity of organic and premium products</li>
+        <li><i class="fas fa-check"></i> Direct communication between farmers and buyers</li>
+        <li><i class="fas fa-check"></i> Reduce fraud and counterfeit products</li>
+        <li><i class="fas fa-check"></i> Build consumer trust with transparent practices</li>
+      </ul>
+    </div>
+
+    <div class="right-panel">
+      <h2>Sign In to Your Account</h2>
+
+      <!-- User type selector -->
+      <div class="user-type-selector">
+        <div class="user-type farmer selected" onclick="selectUserType('farmer')">
+          <i class="fas fa-tractor"></i>
+          <span>Farmer</span>
+        </div>
+            
+        <div class="user-type government" onclick="selectUserType('government')">
+          <i class="fas fa-building"></i>
+          <span>Government</span>
+        </div>
+        <div class="user-type consumer" onclick="selectUserType('consumer')">
+          <i class="fas fa-user"></i>
+          <span>Consumer</span>
+        </div>
+      </div>
+
+      <!-- Login form -->
+      <form action="login.php" method="POST">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn">Sign In</button>
+
+        <div class="links">
+          <a href="#">Forgot Password?</a>
+          <a href="register.html">Create Account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+function selectUserType(type) {
+
+  document.querySelectorAll('.user-type').forEach(el => {
+    el.classList.remove('selected');
+  });
+
+  document.querySelector('.user-type.' + type).classList.add('selected');
+
+  document.getElementById("roleInput").value = type;
+}
+</script>
+
+</body>
+</html>

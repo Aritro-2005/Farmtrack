@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmTrack - Farmer Dashboard</title>
+    <link rel="stylesheet" href="Farmer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-seedling"></i>
+            <h3>FarmTrack</h3>
+        </div>
+        <nav>
+            <a href="#dashboard" class="active" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="#new-batch" onclick="showSection('new-batch')"><i class="fas fa-plus-circle"></i> Create Batch</a>
+            <a href="#sales" onclick="showSection('sales')"><i class="fas fa-sack-dollar"></i> Order from Consumer</a>
+            <a href="#payments" onclick="showSection('payments')"><i class="fas fa-wallet"></i> Payments</a>
+            <a href="/login.html" class="logout-btn-style"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Welcome back!</h1>
+            <div class="user-info">
+                <span>Farm ID: </span>
+            </div>
+        </header>
+
+        <section id="dashboard" class="content-section active">
+            <h2>Dashboard</h2>
+            <div class="kpi-grid">
+                
+                <div class="kpi-card">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Total Sold (Kg)</h3>
+                    <p class="big-number">1,250 <small>kg</small></p>
+                    <small>This season's output</small>
+                </div>
+                <div class="kpi-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Real-Time Market Avg.</h3>
+                    <p class="big-number" id="market-avg-price">₹85.00</p>
+                    <small>Current average price/kg across markets</small>
+                </div>
+                <div class="kpi-card warning">
+                    <i class="fas fa-hourglass-half"></i>
+                    <h3>Smart Contract</h3>
+                    <p class="big-number">1 Pending</p>
+                    <small>500kg of Wheat - Payment due in 2 days</small>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3>Recent Traceability Events</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Batch ID</th>
+                            <th>Product</th>
+                            <th>Event</th>
+                            <th>Date (Blockchain Timestamp)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#BAT-009A</td>
+                            <td>Roma Tomatoes</td>
+                            <td>Shipped to Distributor D</td>
+                            <td>2025-09-29 10:30 UTC</td>
+                        </tr>
+                        <tr>
+                            <td>#BAT-009A</td>
+                            <td>Roma Tomatoes</td>
+                            <td>Quality Check (Grade A)</td>
+                            <td>2025-09-29 09:00 UTC</td>
+                        </tr>
+                        <tr>
+                            <td>#BAT-008C</td>
+                            <td>Organic Wheat</td>
+                            <td>Payment Released (Smart Contract)</td>
+                            <td>2025-09-28 15:45 UTC</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="new-batch" class="content-section">
+            <h2><i class="fas fa-plus-circle"></i> Create New Batch & Log Data</h2>
+            <div class="section-card form-card">
+                <form id="newBatchForm" action="/create_batch.php" method="POST" enctype="multipart/form-data">
+                    
+                   <div class="form-group">
+    <label for="product"><i class="fas fa-carrot"></i> Product & Variety:<span class="required">*</span></label>
+    <input type="text" id="product" name="product" placeholder="Product name" required tabindex="1">
+    <input type="text" name="product_variety" placeholder="Variety (optional)">
+</div>
+
+<div id="statusMessage" class="status-message" style="display:none;"></div>
+
+                    <div class="form-group">
+                        <label for="weight"><i class="fas fa-weight-hanging"></i> Harvest Weight (Kg):<span class="required">*</span></label>
+                        <input type="number" id="weight" name="weight" required min="1" tabindex="2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="harvest-date"><i class="fas fa-calendar-alt"></i> Harvest Date:<span class="required">*</span></label>
+                        <input type="date" id="harvest-date" name="harvest_date" required tabindex="3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="farm-id"><i class="fas fa-map-marker-alt"></i> Farm/Plot ID:</label>
+                        <select id="farm-id" name="farm_id" required tabindex="4">
+                            <option value="FARM-01">Field A (FARM-01)</option>
+                            <option value="FARM-02">Field B (FARM-02)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certificate_file"><i class="fas fa-certificate"></i> Upload Govt Verified Certificate:<span class="required">*</span></label>
+                        <input type="file" id="certificate_file" name="certificate_file" accept="image/*,.pdf" required tabindex="5">
+                        <small>Uploading the certificate photo links its unique hash to the batch record on the blockchain.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quality"><i class="fas fa-check-circle"></i> Quality Grade:</label>
+                        <select id="quality" name="quality_grade" required tabindex="6">
+                            <option value="A">Grade A (Premium)</option>
+                            <option value="B">Grade B (Standard)</option>
+                            <option value="C">Grade C (Processing)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="set-price"><i class="fas fa-dollar-sign"></i> Set Price (Price/Kg):</label>
+                        <input type="number" step="0.01" name="price_per_kg" placeholder="Set Price">
+
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" tabindex="8"><i class="fas fa-lock"></i> SUBMIT RECORD</button>
+
+                    <div id="statusMessage" class="status-message"></div>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Order from Consumer Section -->
+<!-- Order from Consumer Section -->
+<div id="sales" class="content-section">
+    <h2>Order from Consumer</h2>
+    
+    <!-- Active Orders from Consumers Card -->
+    <div class="section-card">
+        <h3><i class="fas fa-shopping-cart"></i> Active Consumer Orders</h3>
+        
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Consumer ID</th>
+                        <th>Product Name</th>
+                        <th>Quantity (kg)</th>
+                        <th>Price (₹/kg)</th>
+                        <th>Delivery Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                    <!-- Data will be loaded here dynamically via PHP -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Recently Accepted Orders Card -->
+    <div class="section-card">
+        <h3><i class="fas fa-check-circle" style="color: var(--success-color);"></i> Recently Accepted Orders</h3>
+        
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Consumer ID</th>
+                        <th>Product</th>
+                        <th>Quantity (kg)</th>
+                        <th>Total Value</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="acceptedOrdersTableBody">
+                    <!-- Data will be loaded here dynamically via PHP -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Order Statistics -->
+    <div class="kpi-grid" style="margin-top: 20px;">
+        <div class="kpi-card">
+            <i class="fas fa-clock"></i>
+            <h3>Pending Orders</h3>
+            <p class="big-number" id="pendingCount">0</p>
+            <small>Awaiting acceptance</small>
+        </div>
+        
+        <div class="kpi-card score-card">
+            <i class="fas fa-weight-scale"></i>
+            <h3>Monthly Quantity</h3>
+            <p class="big-number" id="monthlyQuantity">0 <small>kg</small></p>
+            <small>Accepted orders</small>
+        </div>
+        
+        <div class="kpi-card">
+            <i class="fas fa-indian-rupee-sign"></i>
+            <h3>Monthly Revenue</h3>
+            <p class="big-number" id="monthlyRevenue">₹0</p>
+            <small>This month</small>
+        </div>
+        
+        <div class="kpi-card warning">
+            <i class="fas fa-users"></i>
+            <h3>Active Consumers</h3>
+            <p class="big-number" id="activeConsumers">0</p>
+            <small>Unique buyers</small>
+        </div>
+    </div>
+</div>        <section id="payments" class="content-section">
+            <h2>Payment & Financial Records</h2>
+            <div class="section-card">
+                <h3>Payment History</h3>
+                <p>Transactions below were instantly executed via Smart Contracts.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction ID</th>
+                            <th>Source (Buyer)</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2025-09-28</td>
+                            <td>0xTRX8D2...</td>
+                            <td>Distributor B</td>
+                            <td>₹1,20,000.00</td>
+                            <td class="status-success"><i class="fas fa-check-circle"></i> Auto-Paid</td>
+                        </tr>
+                        <tr>
+                            <td>2025-09-20</td>
+                            <td>0xTRX7C5...</td>
+                            <td>Retailer A</td>
+                            <td>₹76,000.00</td>
+                            <td class="status-success"><i class="fas fa-check-circle"></i> Auto-Paid</td>
+                        </tr>
+                        <tr>
+                            <td>2025-09-15</td>
+                            <td>0xTRX6F9...</td>
+                            <td>Processor Y</td>
+                            <td>₹2,56,000.00</td>
+                            <td class="status-success"><i class="fas fa-check-circle"></i> Auto-Paid</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <button id="downloadReportBtn" class="btn-secondary"><i class="fas fa-download"></i> Download Annual Tax Report</button> -->
+            </div>
+        </section>
+
+    </div>
+
+    <script src="Farmer.js"></script>
+</body>
+</html>

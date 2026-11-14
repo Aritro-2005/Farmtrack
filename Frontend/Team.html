@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - FarmTrack</title>
+    <style>
+        /* Reuse styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #c8e6c9;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: #1b5e20;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #4caf50;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: #c8e6c9;
+            text-decoration: none;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #4caf50;
+        }
+        
+        /* Page-specific styles */
+        .page-hero {
+            background: linear-gradient(rgba(46, 125, 50, 0.8), rgba(46, 125, 50, 0.9)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .page-hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2e7d32;
+        }
+        
+        .team-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e8f5e9;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #2e7d32;
+        }
+        
+        .team-member h3 {
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .member-bio {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hackathon-info {
+            background-color: #e8f5e9;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hackathon-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hackathon-logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #2e7d32;
+                padding: 1rem 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-icon">🌱</span>
+                <h1>FarmTrack</h1>
+            </div>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="benefits.html">Benefits</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h2>Our Team</h2>
+            <p>Meet the AGRI_TECH_IT team behind FarmTrack</p>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Team AGRI_TECH_IT</h2>
+            <div class="team-intro">
+                <p>We are a dedicated team of technology enthusiasts and agricultural innovators who came together for Smart India Hackathon 2025 to develop FarmTrack. Our diverse skills in blockchain development, agriculture, and user experience design have enabled us to create a solution that addresses real-world challenges in the agricultural supply chain.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">👨‍💻</div>
+                    <h3>Rahul Sharma</h3>
+                    <div class="member-role">Blockchain Developer</div>
+                    <div class="member-bio">Expert in blockchain architecture and smart contract development with 5 years of experience in distributed systems.</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍🌾</div>
+                    <h3>Priya Patel</h3>
+                    <div class="member-role">Agricultural Specialist</div>
+                    <div class="member-bio">Background in agricultural science with focus on supply chain optimization and farmer empowerment initiatives.</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👨‍🎨</div>
+                    <h3>Arun Kumar</h3>
+                    <div class="member-role">UX/UI Designer</div>
+                    <div class="member-bio">Specializes in creating intuitive interfaces for users with varying levels of digital literacy and technical expertise.</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍💼</div>
+                    <h3>Neha Gupta</h3>
+                    <div class="member-role">Business Analyst</div>
+                    <div class="member-bio">Focuses on stakeholder needs analysis, business model development, and impact assessment for agricultural technologies.</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👨‍🔧</div>
+                    <h3>Vikram Singh</h3>
+                    <div class="member-role">Backend Developer</div>
+                    <div class="member-bio">Expert in cloud infrastructure, database design, and API development for scalable agricultural applications.</div>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">👩‍🔬</div>
+                    <h3>Anjali Reddy</h3>
+                    <div class="member-role">Data Scientist</div>
+                    <div class="member-bio">Specializes in agricultural data analytics, predictive modeling, and insights generation from supply chain data.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hackathon Info Section -->
+    <section class="hackathon-info">
+        <div class="container">
+            <div class="hackathon-content">
+                <div class="hackathon-logo">🏆</div>
+                <h2 class="section-title">Smart India Hackathon 2025</h2>
+                <p>FarmTrack was developed as part of Smart India Hackathon 2025, a nationwide initiative to promote innovation and problem-solving among students and young professionals. Our project addresses the problem statement focused on improving transparency and efficiency in agricultural supply chains using emerging technologies.</p>
+                <p>We are proud to contribute to the digital transformation of India's agricultural sector and believe that FarmTrack has the potential to make a significant impact on farmer livelihoods and food security.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FarmTrack</h3>
+                    <p>Blockchain-based agricultural supply chain tracking system developed for Smart India Hackathon 2025.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Team</h3>
+                    <ul>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 FarmTrack - Team AGRI_TECH_IT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

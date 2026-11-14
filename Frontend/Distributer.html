@@ -1,0 +1,485 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Produce Distributor Dashboard</title>
+    <link rel="stylesheet" href="Distributer.css">
+</head>
+<body>
+
+    <header>
+        <h1>🌱 FarmTrack</h1>
+        <div id="status-bar">
+            <span id="network-status" class="offline">🔴 OFFLINE</span>
+            <button onclick="syncData()">🔄 Sync Data</button>
+        </div>
+    </header>
+
+    <main id="dashboard-page" class="page-content">
+        <h2>Distributer Dashboard Overview</h2>
+
+        <div class="metrics-grid">
+            <div class="card metric primary" onclick="showVerificationScreen()">
+                <h3>Incoming Shipments</h3>
+                <p id="pending-verification">0</p>
+                <span>Pending Verification</span>
+            </div>
+            <div class="card metric secondary" onclick="showConsumerOrdersPage()">
+                <h3>New Consumer Orders</h3>
+                <p id="new-consumer-orders">2</p>
+                <span>Ready for Delivery</span>
+            </div>
+            <div class="card metric danger">
+                <h3>Low Stock Alerts</h3>
+                <p>2</p>
+                <span>Items Need Ordering</span>
+            </div>
+        </div>
+        
+        <div class="quick-actions">
+            <button class="action-btn primary" onclick="showFarmerOrderPage()">+ Order from Farmer</button>
+            <button class="action-btn" onclick="showConsumerOrdersPage()">+ Take Consumer Order</button>
+            
+            <button class="action-btn secondary" onclick="showAddStockModal()">+ Manually Add Stock</button>
+            <button class="action-btn warning" onclick="showVerificationScreen()">★ Feedback & Rating</button>
+            <button class="action-btn danger" onclick="showReportSelectionModal()">! Report </button>
+        </div>
+
+        <section class="inventory-snapshot">
+            <h3>Inventory Snapshot & Feedback (Consumer View)</h3>
+            <div id="inventory-list">
+                <div class="inventory-item card" data-product-id="spinach_001">
+                    <h4>Organic Spinach</h4>
+                    <p>Stock: 80 kg | Avg. Consumer Rating: ⭐️ 4.9</p>
+                    <small id="feedback-spinach_001">Distributor Note: No recent verification.</small>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <section id="farmer-order-page" class="page-content hidden">
+        <button class="back-btn" onclick="showPage('dashboard-page')">← Back to Dashboard</button>
+        <div class="farmer-order-header">
+            <h2>🛒 Order From Farmers</h2>
+            <button class="action-btn primary" onclick="showFarmerCart()">
+                Cart (<span id="cart-count">0</span>)
+            </button>
+        </div>
+        
+        <input type="text" id="product-search" placeholder="Search product or farmer..." onkeyup="filterProducts()">
+
+        <div class="product-catalog-grid" id="product-catalog-grid">
+            
+            <div class="product-card card" data-product-id="tomato_101" data-product-name="Organic Heirloom Tomatoes" data-farmer-name="Green Acres Farm">
+                <img src="https://media.post.rvohealth.io/wp-content/uploads/2020/09/AN313-Tomatoes-732x549-Thumb.jpg" alt="Organic Tomatoes" onerror="this.src='placeholder.png'">
+                <h3>Organic Tomatoes</h3>
+                <p><strong>Farmer:</strong> Biswajit</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 15 miles</span></div>
+                <label for="qty-tomato_101">Quantity (kg):</label>
+                <input type="number" id="qty-tomato_101" min="1" value="10" class="qty-input">
+                <button class="action-btn" onclick="addToCart('tomato_101')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('tomato_101')">Order Now</button>
+            </div>
+
+            <div class="product-card card" data-product-id="apple_202" data-product-name="Organic Fuji Apples" data-farmer-name="Orchard Bliss">
+                <img src="https://cdn.britannica.com/22/187222-050-07B17FB6/apples-on-a-tree-branch.jpg" alt="Organic Apples" onerror="this.src='placeholder.png'">
+                <h3>Organic Apples</h3>
+                <p><strong>Farmer:</strong> Aritro</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 40 miles</span></div>
+                <label for="qty-apple_202">Quantity (kg):</label>
+                <input type="number" id="qty-apple_202" min="1" value="50" class="qty-input">
+                <button class="action-btn" onclick="addToCart('apple_202')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('apple_202')">Order Now</button>
+            </div>
+            
+             <div class="product-card card" data-product-id="peppers_303" data-product-name="Organic Bell Peppers" data-farmer-name="Sunny Fields">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Green-Yellow-Red-Pepper-2009.jpg/1200px-Green-Yellow-Red-Pepper-2009.jpg" alt="Organic Bell Peppers" onerror="this.src='placeholder.png'">
+                <h3>Organic Bell Peppers</h3>
+                <p><strong>Farmer:</strong> Sunny Fields</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 25 miles</span></div>
+                <label for="qty-peppers_303">Quantity (kg):</label>
+                <input type="number" id="qty-peppers_303" min="1" value="20" class="qty-input">
+                <button class="action-btn" onclick="addToCart('peppers_303')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('peppers_303')">Order Now</button>
+            </div>
+            
+            <div class="product-card card" data-product-id="carrot_404" data-product-name="Organic Carrots" data-farmer-name="Roots & Shoots">
+                <img src="https://bombayseeds.com/cdn/shop/files/Carrot.jpg?v=1729228037" alt="Organic Carrots" onerror="this.src='placeholder.png'">
+                <h3>Organic Carrots</h3>
+                <p><strong>Farmer:</strong> Roots & Shoots</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 30 miles</span></div>
+                <label for="qty-carrot_404">Quantity (kg):</label>
+                <input type="number" id="qty-carrot_404" min="1" value="40" class="qty-input">
+                <button class="action-btn" onclick="addToCart('carrot_404')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('carrot_404')">Order Now</button>
+            </div>
+            
+             <div class="product-card card" data-product-id="banana_505" data-product-name="Organic Bananas" data-farmer-name="Tropical Farms">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAiE9BZy3SyV4Xb83a3V-e8Ywq6z1bVZlGsA&s" alt="Organic Bananas" onerror="this.src='placeholder.png'">
+                <h3>Organic Bananas</h3>
+                <p><strong>Farmer:</strong> Tropical Farms</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 100 miles</span></div>
+                <label for="qty-banana_505">Quantity (kg):</label>
+                <input type="number" id="qty-banana_505" min="1" value="80" class="qty-input">
+                <button class="action-btn" onclick="addToCart('banana_505')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('banana_505')">Order Now</button>
+            </div>
+            
+             <div class="product-card card" data-product-id="garlic_606" data-product-name="Organic Garlic" data-farmer-name="The Allium Patch">
+                <img src="https://www.jiomart.com/images/product/original/590000131/garlic-200-g-product-images-o590000131-p590000131-0-202409251737.jpg?im=Resize=(420,420)" alt="Organic Garlic" onerror="this.src='placeholder.png'">
+                <h3>Organic Garlic</h3>
+                <p><strong>Farmer:</strong> The Allium Patch</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 12 miles</span></div>
+                <label for="qty-garlic_606">Quantity (kg):</label>
+                <input type="number" id="qty-garlic_606" min="1" value="5" class="qty-input">
+                <button class="action-btn" onclick="addToCart('garlic_606')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('garlic_606')">Order Now</button>
+            </div>
+
+             <div class="product-card card" data-product-id="pear_707" data-product-name="Organic Pears" data-farmer-name="Northern Orchards">
+                <img src="https://cdn2.stylecraze.com/wp-content/uploads/2013/07/Benefits-Of-Pears.jpg.webp" alt="Organic Pears" onerror="this.src='placeholder.png'">
+                <h3>Organic Pears</h3>
+                <p><strong>Farmer:</strong> Northern Orchards</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 65 miles</span></div>
+                <label for="qty-pear_707">Quantity (kg):</label>
+                <input type="number" id="qty-pear_707" min="1" value="30" class="qty-input">
+                <button class="action-btn" onclick="addToCart('pear_707')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('pear_707')">Order Now</button>
+            </div>
+
+             <div class="product-card card" data-product-id="broccoli_808" data-product-name="Organic Broccoli" data-farmer-name="Green Leaf Farms">
+                <img src="https://rukminim2.flixcart.com/image/480/640/kcxpbww0/vegetable/r/m/9/500-broccoli-un-branded-whole-no-original-imafty9bggcgmdjv.jpeg?q=90" alt="Organic Broccoli" onerror="this.src='placeholder.png'">
+                <h3>Organic Broccoli</h3>
+                <p><strong>Farmer:</strong> Green Leaf Farms</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 22 miles</span></div>
+                <label for="qty-broccoli_808">Quantity (kg):</label>
+                <input type="number" id="qty-broccoli_808" min="1" value="15" class="qty-input">
+                <button class="action-btn" onclick="addToCart('broccoli_808')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('broccoli_808')">Order Now</button>
+            </div>
+
+             <div class="product-card card" data-product-id="strawberries_909" data-product-name="Organic Strawberries" data-farmer-name="Berry Patch">
+                <img src="https://media.post.rvohealth.io/wp-content/uploads/2020/09/AN295-Strawberries-In-Hands-732x549-thumb-732x549.jpg" alt="Organic Strawberries" onerror="this.src='placeholder.png'">
+                <h3>Organic Strawberries</h3>
+                <p><strong>Farmer:</strong> Berry Patch</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 50 miles</span></div>
+                <label for="qty-strawberries_909">Quantity (kg):</label>
+                <input type="number" id="qty-strawberries_909" min="1" value="5" class="qty-input">
+                <button class="action-btn" onclick="addToCart('strawberries_909')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('strawberries_909')">Order Now</button>
+            </div>
+
+             <div class="product-card card" data-product-id="sweetpotato_100" data-product-name="Organic Sweet Potatoes" data-farmer-name="Root Masters">
+                <img src="https://foodcare.in/cdn/shop/files/sweetpotato.jpg?v=1725364564" alt="Organic Sweet Potatoes" onerror="this.src='placeholder.png'">
+                <h3>Organic Sweet Potatoes</h3>
+                <p><strong>Farmer:</strong> Root Masters</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 35 miles</span></div>
+                <label for="qty-sweetpotato_100">Quantity (kg):</label>
+                <input type="number" id="qty-sweetpotato_100" min="1" value="60" class="qty-input">
+                <button class="action-btn" onclick="addToCart('sweetpotato_100')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('sweetpotato_100')">Order Now</button>
+            </div>
+            
+            <div class="product-card card" data-product-id="zucchini_111" data-product-name="Organic Zucchini" data-farmer-name="Summer Harvest">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNZ2hJYtaYVZYq1AdkzdUAK3kPZ8hUjFkz7A&s" alt="Organic Zucchini" onerror="this.src='placeholder.png'">
+                <h3>Organic Zucchini</h3>
+                <p><strong>Farmer:</strong> Summer Harvest</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 18 miles</span></div>
+                <label for="qty-zucchini_111">Quantity (kg):</label>
+                <input type="number" id="qty-zucchini_111" min="1" value="12" class="qty-input">
+                <button class="action-btn" onclick="addToCart('zucchini_111')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('zucchini_111')">Order Now</button>
+            </div>
+            
+            <div class="product-card card" data-product-id="lime_121" data-product-name="Organic Limes" data-farmer-name="Citrus Central">
+                <img src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/lime-vs-lemon-1296x728-feature.jpg?w=1155&h=1528" alt="Organic Limes" onerror="this.src='placeholder.png'">
+                <h3>Organic Limes</h3>
+                <p><strong>Farmer:</strong> Citrus Central</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 90 miles</span></div>
+                <label for="qty-lime_121">Quantity (kg):</label>
+                <input type="number" id="qty-lime_121" min="1" value="10" class="qty-input">
+                <button class="action-btn" onclick="addToCart('lime_121')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('lime_121')">Order Now</button>
+            </div>
+
+            <div class="product-card card" data-product-id="onions_131" data-product-name="Organic Red Onions" data-farmer-name="Onion King">
+                <img src="https://www.jiomart.com/images/product/original/590011678/onion-1-kg-pack-product-images-o590011678-p611163418-1-202503161707.jpg?im=Resize=(420,420)" alt="Organic Red Onions" onerror="this.src='placeholder.png'">
+                <h3>Organic Red Onions</h3>
+                <p><strong>Farmer:</strong> Onion King</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 28 miles</span></div>
+                <label for="qty-onions_131">Quantity (kg):</label>
+                <input type="number" id="qty-onions_131" min="1" value="30" class="qty-input">
+                <button class="action-btn" onclick="addToCart('onions_131')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('onions_131')">Order Now</button>
+            </div>
+            
+            <div class="product-card card" data-product-id="blueberry_141" data-product-name="Organic Blueberries" data-farmer-name="Blue Harvest">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-ND5Q5Ui2sElFACfLb45YqmMLeGZfWxF5PQ&s" alt="Organic Blueberries" onerror="this.src='placeholder.png'">
+                <h3>Organic Blueberries</h3>
+                <p><strong>Farmer:</strong> Blue Harvest</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 75 miles</span></div>
+                <label for="qty-blueberry_141">Quantity (kg):</label>
+                <input type="number" id="qty-blueberry_141" min="1" value="8" class="qty-input">
+                <button class="action-btn" onclick="addToCart('blueberry_141')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('blueberry_141')">Order Now</button>
+            </div>
+
+            <div class="product-card card" data-product-id="kale_151" data-product-name="Organic Kale" data-farmer-name="Leafy Greens Co.">
+                <img src="https://media.post.rvohealth.io/wp-content/uploads/2020/09/benefits-of-kale-732x549-thumbnail.jpg" alt="Organic Kale" onerror="this.src='placeholder.png'">
+                <h3>Organic Kale</h3>
+                <p><strong>Farmer:</strong> Leafy Greens Co.</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 14 miles</span></div>
+                <label for="qty-kale_151">Quantity (kg):</label>
+                <input type="number" id="qty-kale_151" min="1" value="10" class="qty-input">
+                <button class="action-btn" onclick="addToCart('kale_151')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('kale_151')">Order Now</button>
+            </div>
+
+            <div class="product-card card" data-product-id="ginger_161" data-product-name="Organic Ginger Root" data-farmer-name="Spice World">
+                <img src="https://organicmandya.com/cdn/shop/files/Ginger.jpg?v=1757079802&width=1000" alt="Organic Ginger Root" onerror="this.src='placeholder.png'">
+                <h3>Organic Ginger Root</h3>
+                <p><strong>Farmer:</strong> Spice World</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 85 miles</span></div>
+                <label for="qty-ginger_161">Quantity (kg):</label>
+                <input type="number" id="qty-ginger_161" min="1" value="5" class="qty-input">
+                <button class="action-btn" onclick="addToCart('ginger_161')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('ginger_161')">Order Now</button>
+            </div>
+            
+            <div class="product-card card" data-product-id="cucumber_171" data-product-name="Organic Cucumbers" data-farmer-name="Vines Farms">
+                <img src="https://www.lovefoodhatewaste.com/sites/default/files/styles/twitter_card_image/public/2022-07/Cucumber.jpg.webp?itok=qZ9US8LE" alt="Organic Cucumbers" onerror="this.src='placeholder.png'">
+                <h3>Organic Cucumbers</h3>
+                <p><strong>Farmer:</strong> Vines Farms</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 17 miles</span></div>
+                <label for="qty-cucumber_171">Quantity (kg):</label>
+                <input type="number" id="qty-cucumber_171" min="1" value="18" class="qty-input">
+                <button class="action-btn" onclick="addToCart('cucumber_171')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('cucumber_171')">Order Now</button>
+            </div>
+            
+            <div class="product-card card" data-product-id="orange_181" data-product-name="Organic Oranges" data-farmer-name="Citrus Central">
+                <img src="https://www.allrecipes.com/thmb/y_uvjwXWAuD6T0RxaS19jFvZyFU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1205638014-2000-d0fbf9170f2d43eeb046f56eec65319c.jpg" alt="Organic Oranges" onerror="this.src='placeholder.png'">
+                <h3>Organic Oranges</h3>
+                <p><strong>Farmer:</strong> Citrus Central</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 90 miles</span></div>
+                <label for="qty-orange_181">Quantity (kg):</label>
+                <input type="number" id="qty-orange_181" min="1" value="25" class="qty-input">
+                <button class="action-btn" onclick="addToCart('orange_181')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('orange_181')">Order Now</button>
+            </div>
+            
+            <div class="product-card card" data-product-id="lettuce_191" data-product-name="Organic Romaine Lettuce" data-farmer-name="Green Leaf Farms">
+                <img src="https://i0.wp.com/post.healthline.com/wp-content/uploads/2020/03/romaine-lettuce-1296x728-body.jpg?w=1155&h=1528" alt="Organic Romaine Lettuce" onerror="this.src='placeholder.png'">
+                <h3>Organic Romaine Lettuce</h3>
+                <p><strong>Farmer:</strong> Green Leaf Farms</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 22 miles</span></div>
+                <label for="qty-lettuce_191">Quantity (kg):</label>
+                <input type="number" id="qty-lettuce_191" min="1" value="15" class="qty-input">
+                <button class="action-btn" onclick="addToCart('lettuce_191')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('lettuce_191')">Order Now</button>
+            </div>
+            
+            <div class="product-card card" data-product-id="potato_201" data-product-name="Organic Russet Potatoes" data-farmer-name="Root Masters">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1BPTx1JMtuUs1JxjjhtvnO2FW6InTUoumUg&s" alt="Organic Russet Potatoes" onerror="this.src='placeholder.png'">
+                <h3>Organic Russet Potatoes</h3>
+                <p><strong>Farmer:</strong> Root Masters</p>
+                <div class="details"><span>✅ **Organic**</span><span>📍 35 miles</span></div>
+                <label for="qty-potato_201">Quantity (kg):</label>
+                <input type="number" id="qty-potato_201" min="1" value="100" class="qty-input">
+                <button class="action-btn" onclick="addToCart('potato_201')">Add to Cart</button>
+                <button class="action-btn primary small" onclick="orderNow('potato_201')">Order Now</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="consumer-orders-page" class="page-content hidden">
+        <button class="back-btn" onclick="showPage('dashboard-page')">← Back to Dashboard</button>
+        <h2>📦 Pending Consumer Orders</h2>
+
+        <div id="consumer-order-list">
+            <div class="order-card card secondary" data-order-id="C001">
+                <h4>Order #C001 - **Mr. Biswajit Biswas**</h4>
+                <p><strong>Location:</strong> 45 River St, Apartment 3B (1.2 mi away)</p>
+                <p><strong>Contact:</strong> (555) 123-4567</p>
+                <p><strong>Order Details:</strong></p>
+                <ul>
+                    <li>3 kg Organic Spinach</li>
+                    <li>1.5 kg Organic Bananas</li>
+                    <li>5 units Organic Avocados</li>
+                </ul>
+                <small id="status-C001">Placed: Oct 1, 2025 | Status: Awaiting Distributor Check</small>
+                <div id="actions-C001">
+                    <button class="action-btn primary small" onclick="agreeToOrder('C001')">
+                        ✅ Agree to Order
+                    </button>
+                    <button class="action-btn small" id="dispatch-C001" onclick="dispatchOrder('C001')" disabled style="background-color: #ccc;">
+                        Dispatch Order
+                    </button>
+                </div>
+            </div>
+            
+            <div class="order-card card secondary" data-order-id="C002">
+                <h4>Order #C002 - **The Local Café**</h4>
+                <p><strong>Location:</strong> 120 Market Lane (4.5 mi away - **Bulk Order**)</p>
+                <p><strong>Contact:</strong> (555) 987-6543</p>
+                <p><strong>Order Details:</strong></p>
+                <ul>
+                    <li>20 kg Organic Potatoes</li>
+                    <li>10 kg Organic Onions</li>
+                </ul>
+                <small id="status-C002">Placed: Oct 2, 2025 | Status: Awaiting Distributor Check</small>
+                <div id="actions-C002">
+                    <button class="action-btn primary small" onclick="agreeToOrder('C002')">
+                        ✅ Agree to Order
+                    </button>
+                    <button class="action-btn small" id="dispatch-C002" onclick="dispatchOrder('C002')" disabled style="background-color: #ccc;">
+                        Dispatch Order
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="verification-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeVerificationModal()">&times;</span>
+            <h2>📦 Product Verification (Feedback & Rating)</h2>
+            <form id="verification-form">
+                <label for="product-name-verify">Product:</label>
+                <select id="product-name-verify" required>
+                    <option value="Spinach">Organic Spinach (Order #101)</option>
+                    <option value="Tomatoes">Organic Tomatoes (Order #102)</option>
+                    <option value="Russet Potatoes">Organic Russet Potatoes (Order #103)</option>
+                    <option value="Onion">Organic Onion (Order #104)</option>
+                    <option value="Sweetpotato">Organic Sweetpotato (Order #105)</option>
+                    <option value="Apples">Organic Apples (Order #106)</option>
+                    <option value="Strawberries">Organic Strawberries (Order #107)</option>
+                    <option value="Blueberries">Organic Blueberries (Order #108)</option>
+                    <option value="Broccoli">Organic Broccoli (Order #109)</option>
+                    <option value="Oranges">Organic oranges (Order #110)</option>
+                </select>
+
+                <label for="ordered-qty">Ordered Quantity (kg):</label>
+                <p id="ordered-qty-display" style="font-weight: bold; color: var(--primary-color);">50 kg</p>
+
+                <label for="received-qty">**Actual Received Quantity (kg):**</label>
+                <input type="number" id="received-qty" min="0" value="0" required>
+
+                <label for="quality-score">**Quality Rating (1-5 Stars):**</label>
+                <input type="number" id="quality-score" min="1" max="5" value="5" required>
+
+                <label for="distributor-feedback">**Distributor Feedback (Visible to Consumers):**</label>
+                <textarea id="distributor-feedback" placeholder="Describe quality, ripeness, and quantity accuracy..."></textarea>
+                
+                <button type="submit" class="action-btn primary">✅ VERIFY & STORE (Save Locally)</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="farmer-cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeFarmerCart()">&times;</span>
+            <h2>🧺 Farmer Order Cart</h2>
+            <div id="cart-items-container">
+                <p id="empty-cart-message">Your cart is empty.</p>
+            </div>
+            <div class="cart-actions">
+                <button class="action-btn primary" id="place-order-btn" onclick="placeOrderFromCart()" disabled>
+                    Order from Farmers (Save Locally)
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="add-stock-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAddStockModal()">&times;</span>
+            <h2>➕ Add/Update Current Stock</h2>
+            <form id="add-stock-form">
+                <label for="stock-product-name">Product Name:</label>
+                <input type="text" id="stock-product-name" placeholder="e.g., Organic Spinach" required>
+
+                <label for="stock-quantity">Quantity (kg/units):</label>
+                <input type="number" id="stock-quantity" min="1" required>
+
+                <label for="stock-source">Source/Notes (e.g., from Farmer B, batch #123):</label>
+                <input type="text" id="stock-source" required>
+
+                <button type="submit" class="action-btn primary">Add to Inventory</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="report-selection-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeReportSelectionModal()">&times;</span>
+            <h2>! Select Report Type</h2>
+            <p style="margin-bottom: 20px;">Who are you reporting an issue against?</p>
+            <button class="action-btn danger" style="width: 100%; margin-bottom: 15px;" onclick="showReportFarmerModal()">
+                Report Against **FARMER**
+            </button>
+            <button class="action-btn secondary" style="width: 100%;" onclick="showReportConsumerModal()">
+                Report Against **CONSUMER**
+            </button>
+        </div>
+    </div>
+
+
+    <div id="report-farmer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeReportFarmerModal()">&times;</span>
+            <h2>⚠️ Report Against Farmer</h2>
+            <form id="report-farmer-form">
+                <label for="report-farmer-name">Farmer Name:</label>
+                <input type="text" id="report-farmer-name" placeholder="e.g., Green Acres Farm" required>
+
+                <label for="report-issue-farmer">Issue Type:</label>
+                <select id="report-issue-farmer" required>
+                    <option value="">Select Issue</option>
+                    <option value="quantity">Consistent Quantity Shortage</option>
+                    <option value="quality">Poor Quality/Spoilage</option>
+                    <option value="non-organic">Suspected Non-Organic Practices</option>
+                    <option value="delivery">Late/Missed Delivery</option>
+                </select>
+                
+                <label for="report-details-farmer">Detailed Description:</label>
+                <textarea id="report-details-farmer" placeholder="Provide details, dates, and order numbers..."></textarea>
+
+                <button type="submit" class="action-btn danger">Submit Farmer Report</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="report-consumer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeReportConsumerModal()">&times;</span>
+            <h2>🛑 Report Against Consumer</h2>
+            <form id="report-consumer-form">
+                <label for="report-consumer-name">Consumer Name/Order ID:</label>
+                <input type="text" id="report-consumer-name" placeholder="e.g., Jane Doe / C003" required>
+
+                <label for="report-issue-consumer">Issue Type:</label>
+                <select id="report-issue-consumer" required>
+                    <option value="">Select Issue</option>
+                    <option value="payment">Payment Issue/Refusal</option>
+                    <option value="false-claim">False Quality Claim</option>
+                    <option value="cancellation">Late Cancellation/No-Show</option>
+                    <option value="inaccurate-location">Inaccurate Location</option>
+                </select>
+                
+                <label for="report-details-consumer">Detailed Description:</label>
+                <textarea id="report-details-consumer" placeholder="Provide details, interaction logs, and evidence..."></textarea>
+
+                <button type="submit" class="action-btn danger">Submit Consumer Report</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="Distributer.js"></script>
+</body>
+</html>

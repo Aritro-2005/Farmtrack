@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FARMFRESH - Order Now</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="consumer.css">
+</head>
+<body>
+    <!-- Main Page Navigation -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <i class="fas fa-seedling"></i>
+            <span>FarmTrack</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="active">HOME</a>
+            <a href="#products">PRODUCTS</a>
+            <a href="#orders">ORDERS</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION - BIG ORDER NOW BUTTON -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>FRESH FROM FARM</h1>
+            <h2>TO YOUR TABLE</h2>
+            <p>Organic • Local • Fresh</p>
+            <button class="btn-order" onclick="openOrderForm()">ORDER NOW</button>
+        </div>
+    </section>
+
+    <!-- CATEGORIES SECTION -->
+    <section class="categories">
+        <h2 class="section-title">SHOP BY CATEGORY</h2>
+        <div class="cat-grid">
+            <div class="cat-item" onclick="selectCategory('vegetables')">
+                <i class="fas fa-carrot"></i>
+                <h3>VEGETABLES</h3>
+            </div>
+            <div class="cat-item" onclick="selectCategory('fruits')">
+                <i class="fas fa-apple-alt"></i>
+                <h3>FRUITS</h3>
+            </div>
+            <div class="cat-item" onclick="selectCategory('dairy')">
+                <i class="fas fa-cow"></i>
+                <h3>DAIRY</h3>
+            </div>
+            <div class="cat-item" onclick="selectCategory('grains')">
+                <i class="fas fa-bread-slice"></i>
+                <h3>GRAINS</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="products">
+        <h2 class="section-title">FEATURED PRODUCTS</h2>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <span class="badge">ORGANIC</span>
+                <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400" alt="Tomatoes">
+                <h3>FRESH TOMATOES</h3>
+                <p class="farmer">Green Valley Farm</p>
+                <p class="price">₹60 <span>/kg</span></p>
+                <button class="btn-cart" onclick="openOrderForm()">ADD TO CART</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <span class="badge">FRESH</span>
+                <img src="https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?w=400" alt="Apples">
+                <h3>ORGANIC APPLES</h3>
+                <p class="farmer">Himalayan Orchards</p>
+                <p class="price">₹180 <span>/kg</span></p>
+                <button class="btn-cart" onclick="openOrderForm()">ADD TO CART</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <span class="badge">LOCAL</span>
+                <img src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400" alt="Milk">
+                <h3>FRESH MILK</h3>
+                <p class="farmer">Sunrise Dairy</p>
+                <p class="price">₹70 <span>/litre</span></p>
+                <button class="btn-cart" onclick="openOrderForm()">ADD TO CART</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <span class="badge">ORGANIC</span>
+                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400" alt="Spinach">
+                <h3>FRESH SPINACH</h3>
+                <p class="farmer">Organic Harvest</p>
+                <p class="price">₹40 <span>/bunch</span></p>
+                <button class="btn-cart" onclick="openOrderForm()">ADD TO CART</button>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <span class="badge">FRESH</span>
+                <img src="https://images.unsplash.com/photo-1582972236019-ea4af5ffe587?w=400" alt="Eggs">
+                <h3>BROWN EGGS</h3>
+                <p class="farmer">Happy Hens Farm</p>
+                <p class="price">₹120 <span>/dozen</span></p>
+                <button class="btn-cart" onclick="openOrderForm()">ADD TO CART</button>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <span class="badge">SEASONAL</span>
+                <img src="https://images.unsplash.com/photo-1553279768-865129fa3d72?w=400" alt="Mangoes">
+                <h3>ALPHONSO MANGOES</h3>
+                <p class="farmer">Konkan Farms</p>
+                <p class="price">₹350 <span>/kg</span></p>
+                <button class="btn-cart" onclick="openOrderForm()">ADD TO CART</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <div class="feature">
+            <i class="fas fa-truck"></i>
+            <h3>FREE DELIVERY</h3>
+            <p>On orders ₹500+</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <h3>QUALITY GUARANTEE</h3>
+            <p>100% fresh</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-clock"></i>
+            <h3>24/7 SUPPORT</h3>
+            <p>Always here</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-leaf"></i>
+            <h3>ORGANIC</h3>
+            <p>Certified</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>FARMFRESH</h3>
+                <p>Fresh from farm to your table.</p>
+                <div class="social">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-twitter"></i>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li onclick="scrollToSection('home')">Home</li>
+                    <li onclick="scrollToSection('products')">Products</li>
+                    <li onclick="scrollToSection('orders')">Orders</li>
+                    <li onclick="scrollToSection('contact')">Contact</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> hello@farmfresh.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 FARMFRESH. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ORDER FORM MODAL (Hidden by default) -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <!-- Form Navigation -->
+            <div class="modal-nav">
+                <div class="modal-brand">
+                    <i class="fas fa-leaf"></i>
+                    <span>FarmTrack</span>
+                </div>
+                <button class="btn-modal-close" onclick="closeOrderForm()">
+                    <i class="fas fa-times"></i> CLOSE
+                </button>
+            </div>
+
+            <div class="form-container">
+                <!-- Header -->
+                <div class="form-header">
+                    <i class="fas fa-seedling"></i>
+                    <h1>PLACE YOUR ORDER</h1>
+                    <p>Fill in your details to order fresh farm products</p>
+                </div>
+
+                <!-- Order Form -->
+                <form id="orderForm" onsubmit="submitOrder(event)">
+                    <!-- 1. Product Category -->
+                    <div class="form-group">
+                        <label for="category">
+                            PRODUCT CATEGORY <span class="required">*</span>
+                        </label>
+                        <select id="category" name="category" required onchange="updateProductList()">
+                            <option value="">-- SELECT CATEGORY --</option>
+                            <option value="organic">🌱 ORGANIC</option>
+                            <option value="inorganic">🌾 INORGANIC</option>
+                        </select>
+                    </div>
+
+                    <!-- 2. Product Name with Suggestions -->
+                    <div class="form-group">
+                        <label for="product">
+                            PRODUCT NAME <span class="required">*</span>
+                        </label>
+                        <input type="text" 
+                               id="product" 
+                               name="product" 
+                               placeholder="First select a category above" 
+                               required 
+                               autocomplete="off" 
+                               onkeyup="searchProducts()"
+                               disabled>
+                        <div id="suggestions" class="suggestions-box"></div>
+                    </div>
+
+                    <!-- 3. Quantity -->
+                    <div class="form-group">
+                        <label for="quantity">
+                            QUANTITY <span class="required">*</span>
+                        </label>
+                        <div class="quantity-input">
+                            <button type="button" onclick="changeQuantity(-1)">−</button>
+                            <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" required onchange="updatePrice()">
+                            <button type="button" onclick="changeQuantity(1)">+</button>
+                            <span class="unit">KG</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Price (Auto-calculated) -->
+                    <div class="form-group">
+                        <label for="price">TOTAL PRICE</label>
+                        <div class="price-display">
+                            <span class="rupee">₹</span>
+                            <span id="price" class="price-amount">0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- 5. Delivery Location -->
+                    <div class="form-group">
+                        <label for="location">
+                            DELIVERY LOCATION <span class="required">*</span>
+                        </label>
+                        <textarea id="location" 
+                                  name="location" 
+                                  rows="3" 
+                                  placeholder="Enter your complete address with pincode"
+                                  required></textarea>
+                    </div>
+
+                    <!-- 6. Expected Delivery Date -->
+                    <div class="form-group">
+                        <label for="deliveryDate">EXPECTED DELIVERY DATE</label>
+                        <input type="text" id="deliveryDate" name="deliveryDate" readonly>
+                        <small class="hint">✓ Guaranteed delivery within 24 hours of order</small>
+                    </div>
+
+                    <!-- 7. Payment Options -->
+                    <div class="form-group">
+                        <label>PAYMENT OPTION <span class="required">*</span></label>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="now" required>
+                                <span class="radio-label">💳 PAY NOW (Credit/Debit/UPI)</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="delivery" required>
+                                <span class="radio-label">🚚 PAY ON DELIVERY (Cash/Card)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Buttons -->
+                    <div class="form-buttons">
+                        <button type="button" class="btn-clear" onclick="resetFormFields()">CLEAR ALL</button>
+                        <button type="submit" class="btn-submit">✓ CONFIRM ORDER</button>
+                    </div>
+                </form>
+
+                <!-- Success Message (Hidden by default) -->
+                <div id="successMessage" class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>ORDER CONFIRMED!</h3>
+                    <div class="order-summary" id="orderSummary">
+                        <!-- Order details will be inserted here -->
+                    </div>
+                    <p class="thank-you">Thank you for ordering! 🌱</p>
+                    <div class="success-buttons">
+                        <button type="button" class="btn-new" onclick="placeAnotherOrder()">PLACE ANOTHER ORDER</button>
+                        <button type="button" class="btn-modal-home" onclick="closeOrderForm()">BACK TO HOME</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="consumer.js"></script>
+</body>
+</html>

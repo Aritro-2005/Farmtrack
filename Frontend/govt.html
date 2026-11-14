@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Portal - FarmTrack Certificate Verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="govt.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">🏛️</div>
+                <div class="logo-text">
+                    <h1>FarmTrack Government Portal</h1>
+                    <p>Certificate Verification System</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <div>Officer: Aritro Dey</div>
+                    <div style="font-size: 0.8rem; opacity: 0.9;">Department of Agriculture</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt sidebar-icon"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-certificate sidebar-icon"></i> Certificate Verification</a></li>
+                <li><a href="#"><i class="fas fa-question-circle sidebar-icon"></i> Help & Support</a></li>
+            </ul>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content">
+            <div class="page-header">
+                <h1 class="page-title">Certificate Verification Dashboard</h1>
+                 <div class="page-actions">
+                    <button class="btn btn-outline" id="filterBtn"><i class="fas fa-filter"></i> Filter</button>
+                    <button class="btn btn-outline" id="exportBtn"><i class="fas fa-download"></i> Export</button>
+                    <button class="btn btn-primary" id="refreshBtn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                </div> 
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-filter">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search certificates...">
+                </div>
+                <div class="filter-dropdown">
+                    <select id="statusFilter">
+                        <option value="all">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="verified">Verified</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-value" id="pendingCount">142</div>
+                    <div class="stat-label">Pending Verifications</div>
+                    <div class="stat-trend trend-up"><i class="fas fa-arrow-up"></i> 12% from last week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="verifiedCount">1,248</div>
+                    <div class="stat-label">Verified Certificates</div>
+                    <div class="stat-trend trend-up"><i class="fas fa-arrow-up"></i> 8% from last week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="rejectedCount">34</div>
+                    <div class="stat-label">Rejected Certificates</div>
+                    <div class="stat-trend trend-down"><i class="fas fa-arrow-down"></i> 5% from last week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">97.3%</div>
+                    <div class="stat-label">Verification Accuracy</div>
+                    <div class="stat-trend trend-up"><i class="fas fa-arrow-up"></i> 2.1% from last month</div>
+                </div>
+            </div>
+
+            <!-- Certificate Grid -->
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">Pending Certificates</h2>
+            <div class="certificate-grid" id="certificateGrid">
+                <!-- Certificates will be loaded here by JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Certificate Detail Modal -->
+    <div class="modal" id="certificateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Certificate Details</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="certificate-view">
+                    <div class="certificate-image-large">
+                        <i class="fas fa-file-certificate"></i>
+                    </div>
+                    <div class="certificate-details-large">
+                        <div class="detail-group">
+                            <div class="detail-label">Certificate ID</div>
+                            <div class="detail-value" id="modalCertId">FT-2023-001234</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Farmer Name</div>
+                            <div class="detail-value" id="modalFarmerName">Vikram Singh</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Farm Location</div>
+                            <div class="detail-value" id="modalFarmLocation">Nashik, Maharashtra</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Product Type</div>
+                            <div class="detail-value" id="modalProductType">Organic Grapes</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Harvest Date</div>
+                            <div class="detail-value" id="modalHarvestDate">15 March 2023</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Certificate Issue Date</div>
+                            <div class="detail-value" id="modalIssueDate">20 March 2023</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Verification Status</div>
+                            <div class="detail-value">
+                                <span class="certificate-status status-pending" id="modalStatus">Pending Verification</span>
+                            </div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Additional Notes</div>
+                            <div class="detail-value" id="modalNotes">This certificate confirms that the produce meets all organic farming standards as per government regulations.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="rejectBtn"><i class="fas fa-times"></i> Reject Certificate</button>
+                <button class="btn btn-success" id="verifyBtn"><i class="fas fa-check"></i> Verify Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Certificate verified successfully!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 FarmTrack Government Portal. All rights reserved.</p>
+            <p style="margin-top: 5px; font-size: 0.9rem; opacity: 0.8;">Department of Agriculture, Government of India</p>
+        </div>
+    </footer>
+
+    <script src="govt.js"></script>
+</body>
+</html>

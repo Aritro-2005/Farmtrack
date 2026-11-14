@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About FarmTrack - Blockchain Agricultural Supply Chain</title>
+    <style>
+        /* Reuse styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #c8e6c9;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: #1b5e20;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #4caf50;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: #c8e6c9;
+            text-decoration: none;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #4caf50;
+        }
+        
+        /* Page-specific styles */
+        .page-hero {
+            background: linear-gradient(rgba(46, 125, 50, 0.8), rgba(46, 125, 50, 0.9)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .page-hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2e7d32;
+        }
+        
+        .problem-solution {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .problem-card, .solution-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .problem-card h3, .solution-card h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+        
+        .problem-card {
+            border-left: 5px solid #f44336;
+        }
+        
+        .solution-card {
+            border-left: 5px solid #4caf50;
+        }
+        
+        .challenges {
+            background-color: #e8f5e9;
+            padding: 3rem 0;
+        }
+        
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .challenge-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .challenge-card h4 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #2e7d32;
+                padding: 1rem 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-icon">🌱</span>
+                <h1>FarmTrack</h1>
+            </div>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="benefits.html">Benefits</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h2>About FarmTrack</h2>
+            <p>Learn about our mission to transform the agricultural supply chain with blockchain technology</p>
+        </div>
+    </section>
+
+    <!-- Problem & Solution Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">The Problem & Our Solution</h2>
+            <div class="problem-solution">
+                <div class="problem-card">
+                    <h3>The Problem</h3>
+                    <p>The agricultural supply chain faces significant challenges including:</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>Limited transparency in pricing and transactions</li>
+                        <li>Unfair pricing practices affecting farmers' income</li>
+                        <li>Fraud and counterfeit products in the market</li>
+                        <li>Lack of traceability for food safety issues</li>
+                        <li>Inefficient paperwork and manual record-keeping</li>
+                    </ul>
+                </div>
+                <div class="solution-card">
+                    <h3>Our Solution</h3>
+                    <p>FarmTrack addresses these challenges through:</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>Blockchain-based immutable record keeping</li>
+                        <li>QR code integration for easy access to information</li>
+                        <li>Transparent pricing and transaction history</li>
+                        <li>Complete traceability from farm to consumer</li>
+                        <li>Streamlined processes reducing paperwork</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <h3 style="color: #2e7d32; margin-bottom: 1rem;">Project Context</h3>
+                <p>FarmTrack was developed by team AGRI_TECH_IT for <strong>Smart India Hackathon 2025</strong> to address critical issues in the agricultural supply chain using cutting-edge blockchain technology.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="challenges">
+        <div class="container">
+            <h2 class="section-title">Challenges & Mitigation</h2>
+            <div class="challenges-grid">
+                <div class="challenge-card">
+                    <h4>Low Digital Literacy</h4>
+                    <p>Many farmers have limited experience with digital technologies.</p>
+                    <p><strong>Solution:</strong> Simple tools, intuitive interfaces, and comprehensive training programs.</p>
+                </div>
+                <div class="challenge-card">
+                    <h4>Data Privacy Concerns</h4>
+                    <p>Stakeholders may be concerned about data security and privacy.</p>
+                    <p><strong>Solution:</strong> Permission-based data controls and transparent privacy policies.</p>
+                </div>
+                <div class="challenge-card">
+                    <h4>Infrastructure Limitations</h4>
+                    <p>Rural areas may have limited internet connectivity.</p>
+                    <p><strong>Solution:</strong> Offline capabilities with sync when connectivity is available.</p>
+                </div>
+                <div class="challenge-card">
+                    <h4>Adoption Resistance</h4>
+                    <p>Traditional stakeholders may resist changing established practices.</p>
+                    <p><strong>Solution:</strong> Demonstrate clear benefits and provide gradual transition pathways.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FarmTrack</h3>
+                    <p>Blockchain-based agricultural supply chain tracking system developed for Smart India Hackathon 2025.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Team</h3>
+                    <ul>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 FarmTrack - Team AGRI_TECH_IT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

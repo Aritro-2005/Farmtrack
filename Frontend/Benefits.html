@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits of FarmTrack - Blockchain Agricultural Supply Chain</title>
+    <style>
+        /* Reuse styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: #2e7d32;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #c8e6c9;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        footer {
+            background-color: #1b5e20;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #4caf50;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: #c8e6c9;
+            text-decoration: none;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #4caf50;
+        }
+        
+        /* Page-specific styles */
+        .page-hero {
+            background: linear-gradient(rgba(46, 125, 50, 0.8), rgba(46, 125, 50, 0.9)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .page-hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2e7d32;
+        }
+        
+        .stakeholder-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #c8e6c9;
+            padding-bottom: 0.5rem;
+        }
+        
+        .benefit-card ul {
+            padding-left: 1.5rem;
+        }
+        
+        .benefit-card ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .impact-section {
+            background-color: #e8f5e9;
+            padding: 3rem 0;
+        }
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .impact-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .impact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .impact-card h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #2e7d32;
+                padding: 1rem 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <span class="logo-icon">🌱</span>
+                <h1>FarmTrack</h1>
+            </div>
+            <div class="mobile-menu">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="benefits.html">Benefits</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h2>Benefits of FarmTrack</h2>
+            <p>Discover how our solution creates value for all stakeholders in the agricultural ecosystem</p>
+        </div>
+    </section>
+
+    <!-- Stakeholder Benefits Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Benefits for All Stakeholders</h2>
+            <div class="stakeholder-benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">👨‍🌾</div>
+                    <h3>For Farmers</h3>
+                    <ul>
+                        <li><strong>Fair Pricing:</strong> Transparent pricing eliminates middlemen exploitation</li>
+                        <li><strong>Quality Reputation:</strong> Build reputation for quality produce with verified records</li>
+                        <li><strong>Reduced Paperwork:</strong> Digital records streamline administrative tasks</li>
+                        <li><strong>Direct Consumer Connections:</strong> Opportunities for direct marketing and premium pricing</li>
+                        <li><strong>Access to Market Data:</strong> Insights into consumer preferences and market trends</li>
+                    </ul>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛒</div>
+                    <h3>For Consumers</h3>
+                    <ul>
+                        <li><strong>Food Safety Assurance:</strong> Verified origin and handling information</li>
+                        <li><strong>Transparent Sourcing:</strong> Complete visibility into product journey</li>
+                        <li><strong>Ethical Sourcing:</strong> Confidence in supporting responsible farming practices</li>
+                        <li><strong>Informed Purchasing:</strong> Data-driven decisions about food choices</li>
+                        <li><strong>Quality Verification:</strong> Assurance of product authenticity and quality</li>
+                    </ul>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚚</div>
+                    <h3>For Distributors</h3>
+                    <ul>
+                        <li><strong>Streamlined Inventory:</strong> Efficient tracking and management of stock</li>
+                        <li><strong>Verified Quality:</strong> Confidence in product quality and authenticity</li>
+                        <li><strong>Marketing Advantages:</strong> Differentiation through transparent sourcing</li>
+                        <li><strong>Reduced Losses:</strong> Better tracking reduces spoilage and theft</li>
+                        <li><strong>Supply Chain Efficiency:</strong> Optimized logistics through data insights</li>
+                    </ul>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏛️</div>
+                    <h3>For Government</h3>
+                    <ul>
+                        <li><strong>Reduced Fraud:</strong> Immutable records prevent counterfeit products</li>
+                        <li><strong>Improved Monitoring:</strong> Real-time visibility into supply chain operations</li>
+                        <li><strong>Food Safety:</strong> Quick tracing of contamination sources</li>
+                        <li><strong>Policy Implementation:</strong> Data-driven agricultural policies</li>
+                        <li><strong>Economic Growth:</strong> Support for farmer prosperity and rural development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <div class="container">
+            <h2 class="section-title">Broader Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">💰</div>
+                    <h3>Economic Impact</h3>
+                    <p>Improved farmer incomes, reduced supply chain inefficiencies, and economic growth in rural areas.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🤝</div>
+                    <h3>Social Impact</h3>
+                    <p>More equitable supply chain, strengthened consumer trust, and empowerment of small-scale farmers.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🛡️</div>
+                    <h3>Fraud Reduction</h3>
+                    <p>Immutable blockchain records significantly reduce counterfeit products and supply chain fraud.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🔍</div>
+                    <h3>Traceability</h3>
+                    <p>Quick and accurate tracing of food safety issues back to their source, protecting public health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FarmTrack</h3>
+                    <p>Blockchain-based agricultural supply chain tracking system developed for Smart India Hackathon 2025.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="how-it-works.html">How It Works</a></li>
+                        <li><a href="benefits.html">Benefits</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Team</h3>
+                    <ul>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 FarmTrack - Team AGRI_TECH_IT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
