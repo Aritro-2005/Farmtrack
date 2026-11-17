@@ -232,11 +232,10 @@ flowchart TD
 | Name | Role |
 | :-- | :-- |
 | **Biswajit Biswas** | Team Leader — Frontend, Database & Management |
-| **Aritro Dey** | Blockchain Specialist |
-| **Agamoni Ghosh** | Data Scientist |
-| **Adrija Rudra** | UI/UX Designer |
-| **Samprit Majumder** | Backend Developer |
-| **Pritam Ghosal** | Frontend Developer |
+| **Aritro Dey** | Blockchain Developer |
+| **Agamoni Ghosh** | Frontend, Blockchain Developer |
+| **Samprit Majumder** | MQTT Developer |
+| **Pritam Ghosal** | MQTT Developer |
 
 ---
 
