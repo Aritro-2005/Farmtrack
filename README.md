@@ -46,7 +46,7 @@ FarmTrack uses blockchain because **data stored on it is immutable**. Once an or
 
 | Benefit | What it means for FarmTrack |
 | :-- | :-- |
-| 🔒 **Immutable Records** | Order, shipment and transaction data cannot be changed after it is recorded, so history can always be trusted. |
+| 🔒 **Immutable Records** | Order, shipment, transaction data cannot be changed after it is recorded, so history can always be trusted. |
 | 🤝 **Trust Without Intermediaries** | Farmers and consumers can rely on the same tamper-proof record instead of depending on a middleman. |
 | 🔍 **Transparency & Traceability** | Every step of the supply chain stays on record and can be audited. |
 | 🛡️ **Protection Against Fraud** | Payment and order disputes can be settled using records that nobody can rewrite. |
